@@ -10,10 +10,20 @@ export default class APP extends Component {
       isloggedIn: false,
       token: "",
       name: "",
-      userData: {}
+      notes: []
+    };
+    this.refresh = function() {
+      this.setState({});
     };
     this.logIn = function(data) {
-      this.setState({ name: data.name, token: data.token, isloggedIn: true });
+      this.setState({
+        name: data.name,
+        token: data.token,
+        isloggedIn: true
+      });
+    }.bind(this);
+    this.getNotes = function(notes) {
+      this.setState({ notes: notes });
     }.bind(this);
   }
   render() {
@@ -23,7 +33,12 @@ export default class APP extends Component {
           <React.Fragment>
             <NavBar name={this.state.name} />
             <br />
-            <Body state={this.state} logIn={this.logIn} />
+            <Body
+              state={this.state}
+              logIn={this.logIn}
+              getNotes={this.getNotes}
+              refresh={this.refresh}
+            />
           </React.Fragment>
         </BrowserRouter>
       </div>

@@ -15,9 +15,7 @@ export default class Notes extends Component {
           <div className="col-lg-11 col-md-10">
             <div className="card">
               <div className="card-body">
-                <p className="card-text">
-                  Some quick example text to build on the Notes
-                </p>
+                <p className="card-text">{this.props.note.note}</p>
               </div>
             </div>
           </div>

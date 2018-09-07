@@ -17,7 +17,11 @@ export default class Body extends Component {
     if (this.props.state.isloggedIn) {
       body = (
         <React.Fragment>
-          <HomePage />
+          <HomePage
+            state={this.props.state}
+            getNotes={this.props.getNotes}
+            refresh={this.props.refresh}
+          />
         </React.Fragment>
       );
     } else {
