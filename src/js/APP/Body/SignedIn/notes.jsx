@@ -8,7 +8,11 @@ export default class Notes extends Component {
       <React.Fragment>
         <div className="row">
           <div className="col-lg-1 col-md-2" style={{ align: "center" }}>
-            <button type="button" class="btn btn-outline-danger">
+            <button
+              type="button"
+              class="btn btn-outline-danger"
+              onClick={this.props.delete}
+            >
               Delete
             </button>
           </div>

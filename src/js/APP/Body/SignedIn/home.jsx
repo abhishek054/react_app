@@ -5,6 +5,17 @@ import axios from "axios";
 export default class HomePage extends Component {
   constructor() {
     super();
+    this.onDelete = function(x) {
+      axios
+        .post("http://localhost:10000/deleteNote", x, {
+          headers: {
+            Authorization: `Bearer ${this.props.state.token}`
+          }
+        })
+        .then(res => {
+          this.onClickView();
+        });
+    }.bind(this);
     this.onADD = function() {
       let textbox = document.getElementById("note").value.toString();
       var data = {
@@ -56,7 +67,7 @@ export default class HomePage extends Component {
     return (
       <React.Fragment>
         <div className="container">
-          <h3>Add Notes here</h3>
+          <h5>Add Notes here</h5>
 
           <div className="row">
             <div className="col-lg-11 col-md-11">
@@ -82,9 +93,26 @@ export default class HomePage extends Component {
           </button>
           <br />
           <br />
-          {this.props.state.notes.map(x => (
-            <Notes note={x} />
-          ))}
+          {this.props.state.notes == null ? (
+            <h2>Welcome Home</h2>
+          ) : (
+            <React.Fragment>
+              {this.props.state.notes.length == 0 ? (
+                <h5>No notes added</h5>
+              ) : (
+                <div>
+                  {this.props.state.notes.map(x => (
+                    <Notes
+                      note={x}
+                      delete={() => {
+                        this.onDelete(x);
+                      }}
+                    />
+                  ))}
+                </div>
+              )}
+            </React.Fragment>
+          )}
         </div>
       </React.Fragment>
     );

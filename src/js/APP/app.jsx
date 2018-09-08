@@ -10,10 +10,7 @@ export default class APP extends Component {
       isloggedIn: false,
       token: "",
       name: "",
-      notes: []
-    };
-    this.refresh = function() {
-      this.setState({});
+      notes: null
     };
     this.logIn = function(data) {
       this.setState({

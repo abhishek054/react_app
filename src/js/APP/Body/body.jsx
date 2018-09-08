@@ -8,7 +8,6 @@ export default class Body extends Component {
   constructor(props) {
     super(props);
     this.fun = function(data) {
-      console.log(data);
       this.props.logIn(data);
     }.bind(this);
   }
@@ -36,7 +35,12 @@ export default class Body extends Component {
           <Route
             exact={true}
             path="/"
-            render={() => <h5>Sign in to continue</h5>}
+            render={() => (
+              <React.Fragment>
+                <h5>Sign in to continue</h5>
+                {/* <img src="./image/notepad.png" /> */}
+              </React.Fragment>
+            )}
           />
         </React.Fragment>
       );

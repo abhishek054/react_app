@@ -10,14 +10,11 @@ export default class SignIn extends Component {
     };
     this.onSubmit = function(e) {
       e.preventDefault();
-      console.log(typeof this.props.logIn);
-
       axios.post("http://localhost:10000/signIn", this.state).then(res => {
         if (res.data == "Not Found") {
           console.log("error");
         } else {
           this.props.logIn(res.data);
-          // console.log(res.data);
         }
       });
     }.bind(this);

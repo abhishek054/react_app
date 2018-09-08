@@ -9,25 +9,27 @@ export default class SignUp extends Component {
       email: "",
       password: ""
     };
-    this.onSubmit = e => {
+    this.onSubmit = function(e) {
       e.preventDefault();
       var k = Object.assign({}, this.state);
       k.notes = [];
       // console.log(k);
       axios.post("http://localhost:10000/signUp", k).then(res => {
         console.log(res.data);
+        this.setState({
+          name: "",
+          email: "",
+          password: ""
+        });
+        document.getElementById("form").reset();
+        alert(res.data);
       });
-      this.setState({
-        name: "",
-        email: "",
-        password: ""
-      });
-    };
+    }.bind(this);
   }
   render() {
     return (
       <React.Fragment>
-        <form onSubmit={this.onSubmit}>
+        <form onSubmit={this.onSubmit} id="form">
           <div class="form-group">
             <label for="InputName">Name</label>
             <input
