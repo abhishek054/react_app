@@ -5,6 +5,11 @@ import axios from "axios";
 export default class HomePage extends Component {
   constructor() {
     super();
+    this.keyPress = e => {
+      if (e.key == "Enter") {
+        this.onADD();
+      }
+    };
     this.onDelete = function(x) {
       axios
         .post("http://localhost:10000/deleteNote", x, {
@@ -30,9 +35,7 @@ export default class HomePage extends Component {
             }
           })
           .then(res => {
-            // console.log(res.body);
             document.getElementById("note").value = "";
-            // this.props.refresh;
             this.onClickView();
           });
       }
@@ -51,27 +54,28 @@ export default class HomePage extends Component {
           } else {
             document.getElementById("view").style.display = "none";
             this.props.getNotes(res.data);
-
-            // console.log(res.data);
           }
         });
-      // instance.get().then(res => {
-      //   console.log(res.body);
-      // });
     }.bind(this);
   }
   render() {
-    const divStyle = {
+    const welcome = {
       textAlign: "center"
     };
     return (
-      <React.Fragment>
+      <React.Fragment className="container">
         <div className="container">
           <h5>Add Notes here</h5>
 
           <div className="row">
             <div className="col-lg-11 col-md-11">
-              <input type="text" className="form-control" id="note" />
+              <input
+                type="text"
+                className="form-control"
+                onKeyUp={this.keyPress}
+                id="note"
+                autoFocus
+              />
             </div>
             <div className="col-lg-1 col-md-1">
               <button
@@ -94,7 +98,7 @@ export default class HomePage extends Component {
           <br />
           <br />
           {this.props.state.notes == null ? (
-            <h2>Welcome Home</h2>
+            <h2 style={welcome}>Welcome Home</h2>
           ) : (
             <React.Fragment>
               {this.props.state.notes.length == 0 ? (

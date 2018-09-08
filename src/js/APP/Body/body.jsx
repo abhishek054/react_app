@@ -45,13 +45,6 @@ export default class Body extends Component {
         </React.Fragment>
       );
     }
-    return (
-      //   <Switch>
-      //     <Route exact path="/signUp" component={SignUp} />
-      //     <Route exact path="/signIn" component={SignIn} />
-      //     <Route component={Default} />
-      //   </Switch>
-      body
-    );
+    return body;
   }
 }
